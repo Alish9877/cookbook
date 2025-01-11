@@ -7,7 +7,6 @@ const methodOverride = require('method-override')
 const morgan = require('morgan')
 const session = require('express-session')
 const passUsertoView = require('./middleware/pass-user-to-view')
-const path = require('path');
 const isSignedIn = require('./middleware/is-signed-in')
 
 
@@ -28,8 +27,6 @@ app.use(session({
   resave: false,
   saveUninitialized : true
 }))
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(passUsertoView)
 
@@ -38,26 +35,24 @@ app.use(passUsertoView)
 
 // require controllers 
 const authCtrl = require('./controllers/auth')
-const applicationCtrl = require('./controllers/applications')
-
-// root route
-app.get('/' , async (req,res) => {
-  if (req.session.user){
-    res.redirect(`/users/${req.session.user._id}/applications`)
-  } else {
-  res.render('index.ejs')}
-  })
-  
 
 
-  
 // use controller 
 app.use('/auth' , authCtrl)
-app.use(isSignedIn)
-app.use('/users/:useId/applications' , applicationCtrl)
+
 // app.use(express.static('public'));
 
 
+// root route
+app.get('/' , async (req,res) => {
+res.render('index.ejs')
+})
+
+
+// vip lounge
+app.get('/vip-lounge' , isSignedIn , (req,res) => {
+res.send(`Welcome to the party ${req.session.user.username}`)
+})
 
 app.listen(PORT , () => {
   console.log(`Listening on port ${PORT}`)
