@@ -10,6 +10,7 @@ const passUsertoView = require('./middleware/pass-user-to-view')
 const isSignedIn = require('./middleware/is-signed-in')
 
 
+
 const PORT = process.env.PORT ? process.env.PORT : '3000'
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -35,11 +36,14 @@ app.use(passUsertoView)
 
 // require controllers 
 const authCtrl = require('./controllers/auth')
+const recipeCtrl = require('./controllers/recipes')
+const ingCtrl = require('./controllers/ingredients')
 
 
 // use controller 
 app.use('/auth' , authCtrl)
-
+app.use('/recipes', recipeCtrl)
+app.use('/ingredients', ingCtrl)
 // app.use(express.static('public'));
 
 
