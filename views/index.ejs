@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <title>Cookbook - Home</title>
 </head>
 <body>
-  <% if(user)  { %>
-  <p>Hi <%=user.username%></p>
-  <a href="/auth/sign-out">Sign out</a>
-  <% } else {%>
-    <div class="auth-links">
-      <a href="/auth/sign-up">Sign up</a>
-      <a href="/auth/sign-in">Sign in</a>
-    </div>
-  <%}%>
-  <h1>Welcome to CookBook App</h1>
+  <%- include('./partials/_navbar.ejs') %>
+
+  <h1>Welcome to the Cookbook</h1>
+
+  <% if (user) { %>
+    <p>Hello, <%= user.username %>! Welcome back to your personal recipe collection.</p>
+    <a href="/recipes/index">View My Recipes</a><br>
+    <a href="/recipes/new">Add a New Recipe</a><br>
+    <p><a href="/ingredients/index">Browse All Ingredients</a></p>
+
+    <p><a href="/users/index">Explore the Community</a></p>
+  <% } else { %>
+    <p>Welcome! Please sign up or sign in to start creating and managing your recipes.</p>
+  <% } %>
+
+
 </body>
 </html>

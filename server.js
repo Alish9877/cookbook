@@ -8,6 +8,9 @@ const morgan = require('morgan')
 const session = require('express-session')
 const passUsertoView = require('./middleware/pass-user-to-view')
 const isSignedIn = require('./middleware/is-signed-in')
+const usersController = require('./controllers/users')
+
+
 
 
 
@@ -40,7 +43,9 @@ const recipeCtrl = require('./controllers/recipes')
 const ingCtrl = require('./controllers/ingredients')
 
 
+
 // use controller 
+app.use('/users', usersController)
 app.use('/auth' , authCtrl)
 app.use('/recipes', recipeCtrl)
 app.use('/ingredients', ingCtrl)

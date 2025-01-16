@@ -8,5 +8,5 @@ const ingSchema = new mongoose.Schema({
   timestamps: true // createdAt , updatedAt
 })
 
-const User = mongoose.model('Ingredient' , ingSchema)
+const Ingredient = mongoose.model('Ingredient' , ingSchema)
 module.exports = Ingredient

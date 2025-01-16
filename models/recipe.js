@@ -19,5 +19,5 @@ const recipeSchema = new mongoose.Schema({
   timestamps: true // createdAt , updatedAt
 })
 
-const User = mongoose.model('User' , recipeSchemaSchema)
+const Recipe = mongoose.model('Recipe' , recipeSchema)
 module.exports = Recipe
